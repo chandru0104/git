@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>React Set Count Example - CDN</title>
+  <!-- React & ReactDOM from CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    function App() {
+      console.log("App re-rendered");
+
+      const [count, setCount] = useState(0);
+      const [inputValue, setInputValue] = useState("");
+
+      const handleSetCount = () => {
+        setCount(Number(inputValue) || 0);
+      };
+
+      const handleIncrement = () => {
+        setCount(prev => prev + 1);
+      };
+
+      return (
+        <div style={{ padding: "20px", fontFamily: "Arial" }}>
+          <h2>Count: {count}</h2>
+
+          <input
+            type="number"
+            placeholder="Set count"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            style={{ marginRight: "10px", padding: "5px" }}
+          />
+
+          <button
+            onClick={handleSetCount}
+            style={{ marginRight: "5px", padding: "5px 10px" }}
+          >
+            Set Count
+          </button>
+
+          <button
+            onClick={handleIncrement}
+            style={{ padding: "5px 10px" }}
+          >
+            Increment
+          </button>
+
+          <h2>Count: {count}</h2>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>
